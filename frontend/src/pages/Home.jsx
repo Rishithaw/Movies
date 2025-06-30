@@ -5,9 +5,9 @@ import "../css/Home.css"
 
 function Home() {
     const [searchQuery, setSearchQuery] = useState("");
-    const [movies,setMovies]=useState([]);
-    const [error,setError]=useState(null);
-    const [loading,setLoading]= useState(true);
+    const [movies, setMovies] = useState([]);
+    const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(true);
 
 
     useEffect(() => {
@@ -23,7 +23,7 @@ function Home() {
             }
         }
         loadPopularMovies()
-    }, []) 
+    }, [])
 
     const handleSearch = (e) => {
         e.preventDefault();
@@ -34,20 +34,22 @@ function Home() {
     return <div className="home">
         <form onSubmit={handleSearch} className="search-form">
             <input type="text"
-            className="search-input"
-            placeholder="Search for movies...."
-            value={searchQuery} 
-            onChange={(e) =>setSearchQuery(e.target.value)}/>
+                className="search-input"
+                placeholder="Search for movies...."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)} />
             <button type="submit" className="search-button">Search</button>
         </form>
+        
 
-        <div className="movies-grid">
-            {movies.map((movie => 
-                (
+        {loading ? (<div className="loading">Loading....</div>) : (<div className="movies-grid">
+            {movies.map((movie) =>
+            (
                 <MovieCard movie={movie} key={movie.id} />
-                )
             ))}
         </div>
+        )}
+
     </div>
 }
 export default Home
